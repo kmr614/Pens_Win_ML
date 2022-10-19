@@ -40,7 +40,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OrdinalEncoder
 ct = ColumnTransformer(transformers=[('encoder', OrdinalEncoder(), [0])], remainder='passthrough')
 x = np.array(ct.fit_transform(x))
-#print(x)
+print(x)
 
 '''Split the test and training set'''
 from sklearn.model_selection import train_test_split
@@ -59,7 +59,7 @@ ann = tf.keras.models.Sequential()
 ann.add(tf.keras.layers.Dense(units = 6, activation = 'relu'))
 ann.add(tf.keras.layers.Dense(units = 6, activation = 'relu'))
 
-ann.add(tf.keras.layers.Dense(units = 1, activation = 'sigmoid'))
+ann.add(tf.keras.layers.Dense(units = 1, activation = 'relu'))
 
 ann.compile(optimizer = 'adam', loss = 'mean_squared_error')#, metrics = ['accuracy'])
 
@@ -68,15 +68,15 @@ ann.fit(x_train, y_train, batch_size = 32, epochs = 100)
 train_mse = ann.evaluate(x_train, y_train, verbose = 0)
 test_mse = ann.evaluate(x_test, y_test, verbose = 0)
 
-print('Train: %.3f, Test: %.3f' % (train_mse, test_mse))
+# print('Train: %.3f, Test: %.3f' % (train_mse, test_mse))
 
 
 #Predicting the Test set results
 y_pred = ann.predict(x_test)
-y_pred = (y_pred > 0.5)
-np.concatenate((y_pred.reshape(len(y_pred),1), y_test.reshape(len(y_test),1)),1)
-print("y_pred.shape")
-print(y_pred.shape)
+#y_pred = (y_pred > 0.5)
+#np.concatenate((y_pred.reshape(len(y_pred),1), y_test.reshape(len(y_test),1)),1)
+# print("y_pred.shape")
+# print(y_pred)
 
 # Making the Confusion Matrix
 #from sklearn.metrics import confusion_matrix, accuracy_score
@@ -85,8 +85,10 @@ print(y_pred.shape)
 #print(accuracy_score(y_test, y_pred))
 
 
-#user_input = input("Which team do you want to predict: ")
-prediction = ann.predict(sc.transform([[0.0, 4]])) > 0.5
+user_input = input("Which team do you want to predict: ")
+goals_against = input("How many goals will they score: ")
 
-#print("prediction")
-#print(prediction)
+prediction = ann.predict(sc.transform([[user_input, goals_against]]))
+
+print("My Model predics the Penguins will score: {}".format(prediction))
+

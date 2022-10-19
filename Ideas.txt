@@ -8,6 +8,7 @@ Using Artificial Neural Network
         - Create one for goals for
             - Take in same data in Pens_ML (Pens_Data.csv) and create model for goals for
 
+-Need to figure out how to take predcition and display it as a actual number
 
 
 
