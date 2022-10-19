@@ -73,22 +73,12 @@ test_mse = ann.evaluate(x_test, y_test, verbose = 0)
 
 #Predicting the Test set results
 y_pred = ann.predict(x_test)
-#y_pred = (y_pred > 0.5)
-#np.concatenate((y_pred.reshape(len(y_pred),1), y_test.reshape(len(y_test),1)),1)
-# print("y_pred.shape")
-# print(y_pred)
-
-# Making the Confusion Matrix
-#from sklearn.metrics import confusion_matrix, accuracy_score
-#cm = confusion_matrix(y_test, y_pred)
-#print(cm)
-#print(accuracy_score(y_test, y_pred))
-
 
 user_input = input("Which team do you want to predict: ")
 goals_against = input("How many goals will they score: ")
 
 prediction = ann.predict(sc.transform([[user_input, goals_against]]))
+
 
 print("My Model predics the Penguins will score: {}".format(prediction))
 
