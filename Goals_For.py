@@ -8,6 +8,7 @@ File contains the Artifical Neural Network machine learning model and applying i
 from re import X
 import numpy as np
 import pandas as pd
+import math
 from sklearn.cluster import k_means
 import tensorflow as tf
 
@@ -59,9 +60,10 @@ ann = tf.keras.models.Sequential()
 ann.add(tf.keras.layers.Dense(units = 6, activation = 'relu'))
 ann.add(tf.keras.layers.Dense(units = 6, activation = 'relu'))
 
+
 ann.add(tf.keras.layers.Dense(units = 1, activation = 'relu'))
 
-ann.compile(optimizer = 'adam', loss = 'mean_squared_error')#, metrics = ['accuracy'])
+ann.compile(optimizer = 'adam', loss = 'mean_squared_error', metrics = ['accuracy'])
 
 ann.fit(x_train, y_train, batch_size = 32, epochs = 100)
 
@@ -77,8 +79,13 @@ y_pred = ann.predict(x_test)
 user_input = input("Which team do you want to predict: ")
 goals_against = input("How many goals will they score: ")
 
-prediction = ann.predict(sc.transform([[user_input, goals_against]]))
+temp_prediction = ann.predict(sc.transform([[user_input, goals_against]]))
 
 
-print("My Model predics the Penguins will score: {}".format(prediction))
+#Cleaning up variables for displaying purposes
+string_prediction = np.ndarray.tolist(temp_prediction)
+prediction = string_prediction[0][0]
+print(type(prediction)) 
+
+print("My Model predics the Penguins will score: {}".format(round(prediction,2)))
 
