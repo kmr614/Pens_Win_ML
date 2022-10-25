@@ -4,11 +4,15 @@ Collect data in CSV
 Using Artificial Neural Network
 	- Take the Opponent and Goals For/Against and make prediction whether the Penguins win the game
 
-    - Maybe create a model to predict how many goals will be scored for both the penguins and the opponent and input then check if the pens win
+- Done    - Maybe create a model to predict how many goals will be scored for both the penguins and the opponent and input then check if the pens win
         - Create one for goals for
             - Take in same data in Pens_ML (Pens_Data.csv) and create model for goals for
 
--Need to figure out how to take predcition and display it as a actual number
+- Done - Need to figure out how to take predcition and display it as a actual number
+
+
+Create a way to get the amount of goals the opponent will score, then merge goals for and goals against into one
+one file
 
 
 
